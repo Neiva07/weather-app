@@ -8,7 +8,10 @@ export async function getForecast () {
             url: BELEMFORECAST,
             responseType: 'json'
         })
-        .then(response => response.data.list)
+        .then(response => {
+            return response.data.list
+        }
+        )
 }
 export function threeHoursToDailyForecast(daysInfo) {
        const days = new Array(5);
@@ -24,7 +27,6 @@ export function maxMinDailyTemperature(daysInfo, category){
            return acc;
        },[]))
         const featureTempArray= tempArray.map(day => Math[category](...day))
-        console.log(featureTempArray);
         return featureTempArray;
     }
 export function chooseDailyIcon(daysInfo) {
@@ -66,7 +68,6 @@ export function nextFiveDays(daysInfo) {
                 return "Sex"
             else return "Sab"
         })
-        console.log(weekDate)
         return weekDate;
     }
 

@@ -20,9 +20,7 @@ class Weather extends Component {
     async loadForecast () {
         const dataList = await functionCalls.getForecast();
         const dailyInfo = functionCalls.threeHoursToDailyForecast(dataList)  
-        console.log(dailyInfo)
         this.setState({dailyForecast: dailyInfo})
-        
     }
     
     getDailyForecast(){
@@ -40,6 +38,7 @@ class Weather extends Component {
     }    
     render() {
         const {dayIcon, maxTemp, minTemp, weekDay}= this.getDailyForecast();
+        const {dailyForecast} = this.state; 
         const weatherDays = new Array(5);
         for(let i=0; i<weatherDays.length; i++)
             weatherDays[i] = (
@@ -53,7 +52,6 @@ class Weather extends Component {
                 <Link to="/facebook">Facebook</Link>
                 <Link to="/airbnb">Airbnb</Link>
                 <Link to="/pinterest">Pinterest</Link>
-                <Route path="/:day" component={dailyForecast}/>
             </div>
         );
     }
