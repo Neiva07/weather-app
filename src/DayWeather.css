@@ -1,0 +1,10 @@
+.thumbnail {
+    max-width: 100px;
+}
+img {
+    width: 100%;
+}
+.day-card {
+    text-align: center;
+    margin: 5px 5px;
+}
