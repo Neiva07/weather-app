@@ -53,23 +53,9 @@ export function chooseDailyIcon(daysInfo) {
     }
 export function nextFiveDays(daysInfo) {
         const date = daysInfo.map(day => new Date(day[0].dt_txt).getDay())
-        const weekDate = date.map(day => {
-            if(day === 0)
-                return "Dom"
-            else if (day === 1)
-                return "Seg"
-            else if(day === 2)
-                return "Ter"
-            else if(day === 3)
-                return "Qua"
-            else if(day === 4)
-                return "Qui"
-            else if (day === 5)
-                return "Sex"
-            else return "Sab"
-        })
+        const weekDate = date.map(day => getWeekDay(day)) 
         return weekDate;
-    }
+}
 
 export function getForecastForADay(dayInfo) {
     const dayForecast = dayInfo.map(forecast => {
@@ -77,8 +63,24 @@ export function getForecastForADay(dayInfo) {
             maxTemp: forecast.main.temp_max,
             minTemp : forecast.main.temp_min,
             icon : forecast.weather[0].icon,
-            hour : new Date(forecast.dt_txt).getHours()
+            date : new Date(forecast.dt_txt)
         }
     })  
     return dayForecast
+}
+
+export function getWeekDay (day) {
+            if(day === 0)
+                return "Sunday"
+            else if (day === 1)
+                return "Monday"
+            else if(day === 2)
+                return "Tuesday"
+            else if(day === 3)
+                return "Wednesday"
+            else if(day === 4)
+                return "Thursday"
+            else if (day === 5)
+                return "Friday"
+            else return "Saturday"
 }

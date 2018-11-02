@@ -28,7 +28,7 @@ class Weather extends Component {
         const minTemp = functionCalls.maxMinDailyTemperature(dailyInfo, 'min') 
         const maxTemp = functionCalls.maxMinDailyTemperature(dailyInfo, 'max')
         const dayIcon = functionCalls.chooseDailyIcon(dailyInfo)
-        const weekDay = functionCalls.nextFiveDays(dailyInfo)
+        const weekDay = functionCalls.nextFiveDays(dailyInfo).map(weekday => weekday.slice(0,3))
         return({
             minTemp,
             maxTemp,
@@ -41,7 +41,7 @@ class Weather extends Component {
         const weatherDays = new Array(5);
         for(let i=0; i<weatherDays.length; i++)
             weatherDays[i] = (
-                   <Link to={`${i}`}><DayWeather key={i} icon={dayIcon[i]} maxTemp={maxTemp[i]} minTemp={minTemp[i]} day={weekDay[i]} /> </Link>
+                       <Link style={{textDecoration: 'none', color: 'black'}} to={`${i}`}><DayWeather key={i} icon={dayIcon[i]} maxTemp={maxTemp[i]} minTemp={minTemp[i]} day={weekDay[i]} /> </Link>
             )
         return (
             <div >

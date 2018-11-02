@@ -13,16 +13,17 @@ class HourWeather extends Component {
     render(){
         const {dayForecast} = this.props; 
         const dayInfo = functionCalls.getForecastForADay(dayForecast);
-        console.log(dayInfo)
         const dayWeatherCards = dayInfo.map(forecast => (
-            <DayWeather day={forecast.hour} {...forecast}/>
+            <DayWeather day={`${forecast.date.getHours()} hr`} {...forecast}/>
         )) 
-        console.log(dayWeatherCards)
         return (
-            <div className="forecast">
-                {dayWeatherCards} 
+            <div>
+                {dayInfo[0] ? <h3 style={{textAlign: 'center'}}>Forecast from {dayInfo[0].date.getHours()}:00 of {functionCalls.getWeekDay(dayInfo[0].date.getDay())} to 24h</h3> : null}
+                <div className="forecast">
+                    {dayWeatherCards} 
+                </div>
             </div>
-        );
+            );
     }
 }
 
