@@ -7,4 +7,5 @@ img {
 .day-card {
     text-align: center;
     margin: 5px 5px;
+    width: 100px;
 }

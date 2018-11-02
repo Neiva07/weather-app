@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BELEMFORECAST = 'http://api.openweathermap.org/data/2.5/forecast?id=3405870&APPID=e6cfbd410ffbdea0015f8808679f0592'
+const BELEMFORECAST = 'http://api.openweathermap.org/data/2.5/forecast?id=3405870&APPID=e6cfbd410ffbdea0015f8808679f0592&units=metric'
 
 export async function getForecast () {
         return axios({
@@ -36,18 +36,22 @@ export function chooseDailyIcon(daysInfo) {
         },[]))
         const dayIcon = iconArray.map(mapDay => {
             if(mapDay.includes("13d"))
-                return "13d"
+                return "snowing"
             else if (mapDay.includes("50d"))
-                return "50d"
-            else if(mapDay.includes("11d"))
-                return "11d"
-            else if(mapDay.includes("09d"))
-                return "09d"
-            else if(mapDay.includes("03d"))
-                return "03d"
+                return "fog"
+            else if(mapDay.includes("10d"))
+                return "dayRain"
+            else if(mapDay.includes("10n"))
+                return "nightRain"
+            else if(mapDay.includes("03d") || mapDay.includes("04d") || mapDay.include("03n") || mapDay.include("04n"))
+                return "cloudy"
             else if(mapDay.includes("02d"))
-                return "02d"
-            else return "01d"
+                return "dayCloud"
+            else if(mapDay.includes("02n"))
+                return "nightCloud"
+            else if(mapDay.includes("01d"))
+                return "sun"
+            else return "moon"
         })
         return dayIcon;
     }
@@ -62,7 +66,7 @@ export function getForecastForADay(dayInfo) {
         return {
             maxTemp: forecast.main.temp_max,
             minTemp : forecast.main.temp_min,
-            icon : forecast.weather[0].icon,
+            icon : getIcons(forecast.weather[0].icon),
             date : new Date(forecast.dt_txt)
         }
     })  
@@ -83,4 +87,23 @@ export function getWeekDay (day) {
             else if (day === 5)
                 return "Friday"
             else return "Saturday"
+}
+export function getIcons(icon) {
+        if(icon === "13d")
+            return "snowing"
+        else if (icon === "50d")
+            return "fog"
+        else if(icon === "10d")
+            return "dayRain"
+        else if(icon === "10n")
+            return "nightRain"
+        else if(icon === "03d" || icon === "04d" || icon === "03n" || icon === "04n")
+            return "cloudy"
+        else if(icon === "02d")
+            return "dayCloud"
+        else if(icon === "02n")
+            return "nightCloud"
+        else if(icon === "01d")
+            return "sun"
+        else return "moon"
 }
