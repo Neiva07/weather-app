@@ -38,11 +38,15 @@ class Weather extends Component {
     }    
     render() {
         const {dayIcon, maxTemp, minTemp, weekDay}= this.getDailyForecast();
-        const weatherDays = new Array(5);
-        for(let i=0; i<weatherDays.length; i++)
+        let weatherDays = <h2>Loading...</h2>;
+        if(this.state.dailyInfo[0]){
+            weatherDays = Array(5);
+            for(let i=0; i<weatherDays.length; i++)
             weatherDays[i] = (
                        <Link style={{textDecoration: 'none', color: 'black'}} to={`${i}`}><DayWeather key={i} icon={dayIcon[i]} maxTemp={maxTemp[i]} minTemp={minTemp[i]} day={weekDay[i]} /> </Link>
             )
+
+        }        console.log(weatherDays)
         return (
             <div >
                 <div  className='forecast'>

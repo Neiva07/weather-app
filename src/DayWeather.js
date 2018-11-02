@@ -1,30 +1,23 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './DayWeather.css'
-import axios from 'axios'
 import icons from './icons'
 
-class DayWeather extends Component {
-    constructor(props) {
-        super(props);
-    }
+const DayWeather = (props) => {
 
-    render(){
-        console.log(icons)
-        const {day, icon, minTemp, maxTemp} = this.props;
-        return(
-            <div className="day-card thumbnail">
-                <div>
-                    <p>{day}</p> 
-                </div>
-                <div>
-                    <img src={icons[icon]} />
-                </div>    
-                <div>
-                    <p>{maxTemp}º <br/> {minTemp}º</p>
-                </div>
-            </div> 
-        )
-    }
+    const {day, icon, minTemp, maxTemp} = props;
+    return(
+        <div className="day-card thumbnail">
+            <div>
+                <p>{day}</p> 
+            </div>
+            <div>
+                <img src={icons[icon]} alt="weather-icon" />
+            </div>    
+            <div>
+        {maxTemp !== minTemp ? <p>{maxTemp}º <br/> {minTemp}º</p> : <p>{maxTemp}º</p> }
+            </div>
+        </div> 
+    )
 }
 
 export default DayWeather;
