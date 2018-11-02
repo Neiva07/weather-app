@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import DayWeather from './DayWeather';
 import './Weather.css'
 import HourWeather from './HourWeather'
-import axios from 'axios'
 import * as functionCalls from './api'
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import {Route, Link} from 'react-router-dom'
 class Weather extends Component {
     constructor(props) {
         super(props);
@@ -43,10 +42,10 @@ class Weather extends Component {
             weatherDays = Array(5);
             for(let i=0; i<weatherDays.length; i++)
             weatherDays[i] = (
-                       <Link style={{textDecoration: 'none', color: 'black'}} to={`${i}`}><DayWeather key={i} icon={dayIcon[i]} maxTemp={maxTemp[i]} minTemp={minTemp[i]} day={weekDay[i]} /> </Link>
+                       <Link key={i} style={{textDecoration: 'none', color: 'black'}} to={`${i}`}><DayWeather key={i} icon={dayIcon[i]} maxTemp={maxTemp[i]} minTemp={minTemp[i]} day={weekDay[i]} /> </Link>
             )
 
-        }        console.log(weatherDays)
+        }        
         return (
             <div >
                 <div  className='forecast'>

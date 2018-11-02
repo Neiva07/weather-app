@@ -3,15 +3,15 @@ import axios from 'axios';
 const BELEMFORECAST = 'http://api.openweathermap.org/data/2.5/forecast?id=3405870&APPID=e6cfbd410ffbdea0015f8808679f0592&units=metric'
 
 export async function getForecast () {
-        return axios({
-            method: 'get',
-            url: BELEMFORECAST,
-            responseType: 'json'
-        })
-        .then(response => {
-            return response.data.list
-        }
-        )
+    return axios({
+        method: 'get',
+        url: BELEMFORECAST,
+        responseType: 'json'
+    })
+    .then(response => {
+        return response.data.list
+    }
+    )
 }
 export function threeHoursToDailyForecast(daysInfo) {
        const days = new Array(5);
