@@ -71,3 +71,14 @@ export function nextFiveDays(daysInfo) {
         return weekDate;
     }
 
+export function getForecastForADay(dayInfo) {
+    const dayForecast = dayInfo.map(forecast => {
+        return {
+            maxTemp: forecast.main.temp_max,
+            minTemp : forecast.main.temp_min,
+            icon : forecast.weather[0].icon,
+            hour : new Date(forecast.dt_txt).getHours()
+        }
+    })  
+    return dayForecast
+}

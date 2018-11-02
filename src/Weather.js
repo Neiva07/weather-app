@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import DayWeather from './DayWeather';
 import './Weather.css'
+import HourWeather from './HourWeather'
 import axios from 'axios'
 import * as functionCalls from './api'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
-
 class Weather extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dailyForecast: new Array(5)
+            dailyInfo: Array(5)
         }
         this.loadForecast = this.loadForecast.bind(this);
     }
@@ -20,11 +20,11 @@ class Weather extends Component {
     async loadForecast () {
         const dataList = await functionCalls.getForecast();
         const dailyInfo = functionCalls.threeHoursToDailyForecast(dataList)  
-        this.setState({dailyForecast: dailyInfo})
+        this.setState({dailyInfo: [...dailyInfo]})
     }
     
     getDailyForecast(){
-        const dailyInfo = this.state.dailyForecast;
+        const {dailyInfo} = this.state;
         const minTemp = functionCalls.maxMinDailyTemperature(dailyInfo, 'min') 
         const maxTemp = functionCalls.maxMinDailyTemperature(dailyInfo, 'max')
         const dayIcon = functionCalls.chooseDailyIcon(dailyInfo)
@@ -38,7 +38,6 @@ class Weather extends Component {
     }    
     render() {
         const {dayIcon, maxTemp, minTemp, weekDay}= this.getDailyForecast();
-        const {dailyForecast} = this.state; 
         const weatherDays = new Array(5);
         for(let i=0; i<weatherDays.length; i++)
             weatherDays[i] = (
@@ -52,15 +51,10 @@ class Weather extends Component {
                 <Link to="/facebook">Facebook</Link>
                 <Link to="/airbnb">Airbnb</Link>
                 <Link to="/pinterest">Pinterest</Link>
+                <Route path="/:day" render={props => <HourWeather {...props} dayForecast={this.state.dailyInfo[props.match.params.day]}/>}/>
             </div>
         );
     }
-}
-function dailyForecast({match}) {
-    const day = match.params.day;
-    return (
-        <h2>{day}!!!!</h2>
-    ) 
 }
 
 export default Weather;

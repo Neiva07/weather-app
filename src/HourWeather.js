@@ -1,14 +1,29 @@
 import React, {Component} from 'react';
 import DayWeather from './DayWeather'
+import PropTypes from 'prop-types'
+import * as functionCalls from './api.js'
 
-const HourWeather = (dailyInfo) => {
-    console.log(dailyInfo)
-   //const hourCards = dailyInfo.map(hour => <DayWeather {...hour} />) 
-    //console.log(hourCards)
-   return (
-        <div className="hour-cards">
-        </div>
-   ); 
+class HourWeather extends Component {
+    constructor(props) {
+        super(props)
+    }
+    static defaultProps = {
+        dayForecast: Array(8)
+    }
+    render(){
+        const {dayForecast} = this.props; 
+        const dayInfo = functionCalls.getForecastForADay(dayForecast);
+        console.log(dayInfo)
+        const dayWeatherCards = dayInfo.map(forecast => (
+            <DayWeather day={forecast.hour} {...forecast}/>
+        )) 
+        console.log(dayWeatherCards)
+        return (
+            <div className="hour-weather">
+                {dayWeatherCards} 
+            </div>
+        );
+    }
 }
 
 export default HourWeather;
