@@ -19,7 +19,7 @@ class HourWeather extends Component {
         )) 
         console.log(dayWeatherCards)
         return (
-            <div className="hour-weather">
+            <div className="forecast">
                 {dayWeatherCards} 
             </div>
         );

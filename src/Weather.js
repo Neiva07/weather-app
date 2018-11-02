@@ -41,17 +41,14 @@ class Weather extends Component {
         const weatherDays = new Array(5);
         for(let i=0; i<weatherDays.length; i++)
             weatherDays[i] = (
-                    <DayWeather key={i} icon={dayIcon[i]} maxTemp={maxTemp[i]} minTemp={minTemp[i]} day={weekDay[i]} />
+                   <Link to={`${i}`}><DayWeather key={i} icon={dayIcon[i]} maxTemp={maxTemp[i]} minTemp={minTemp[i]} day={weekDay[i]} /> </Link>
             )
         return (
-            <div className='forecast'>
-                {weatherDays}
-                <Link to="/netflix">Netflix</Link>
-                <Link to="/google">Google</Link>
-                <Link to="/facebook">Facebook</Link>
-                <Link to="/airbnb">Airbnb</Link>
-                <Link to="/pinterest">Pinterest</Link>
-                <Route path="/:day" render={props => <HourWeather {...props} dayForecast={this.state.dailyInfo[props.match.params.day]}/>}/>
+            <div >
+                <div  className='forecast'>
+                    {weatherDays}
+                </div>
+               <Route path="/:day" render={props => <HourWeather {...props} dayForecast={this.state.dailyInfo[props.match.params.day]}/>}/>
             </div>
         );
     }
