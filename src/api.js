@@ -43,7 +43,7 @@ export function chooseDailyIcon(daysInfo) {
                 return "dayRain"
             else if(mapDay.includes("10n"))
                 return "nightRain"
-            else if(mapDay.includes("03d") || mapDay.includes("04d") || mapDay.include("03n") || mapDay.include("04n"))
+            else if(mapDay.includes("03d") || mapDay.includes("04d") || mapDay.includes("03n") || mapDay.includes("04n"))
                 return "cloudy"
             else if(mapDay.includes("02d"))
                 return "dayCloud"
