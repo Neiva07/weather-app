@@ -18,7 +18,7 @@ const HourWeather = props => {
         </div>
         );
 }
-HourWeather.porpTYpes = {
+HourWeather.porpTypes = {
     dayForecast: PropTypes.arrayOf(PropTypes.object).isRequired
     }
 
